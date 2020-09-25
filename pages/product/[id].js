@@ -1,7 +1,11 @@
-import { products } from '@/constants/index';
 import React from 'react';
+import { useRouter } from 'next/router';
 
-function ProductDetails({ product }) {
+function ProductDetails() {
+    const { query } = useRouter();
+
+    const product = products.find(({ id }) => id === parseInt(query.id));
+
     const { title, desc } = product;
     return (
         <div className="container">
