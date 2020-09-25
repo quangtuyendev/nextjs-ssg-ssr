@@ -2,7 +2,7 @@ import { products } from '@/constants/index';
 import React from 'react';
 
 function ProductDetails({ product }) {
-    const { title, desc } = product || {};
+    const { title, desc } = product;
     return (
         <div className="container">
             <div className="row">
@@ -22,36 +22,14 @@ function ProductDetails({ product }) {
 
 export default ProductDetails;
 
-export async function getStaticProps({ params }) {
-    const product = products.find(({ id }) => id === parseInt(params.id));
+export async function getServerSideProps() {
     return {
         props: {
-            product
+            product: {
+                id: 1,
+                title: 'Apple Iphone X',
+                desc: 'It was popularized in the 1960s with the release of Leeriest sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like.'
+            }
         },
-    };
-}
-
-export async function getStaticPaths() {
-    const products = [
-        {
-          params: {
-              id: '1',
-          }
-        },
-        {
-          params: {
-              id: '2',
-          }
-        },
-        {
-          params: {
-              id: '3',
-          }
-        }
-      ]
-
-    return {
-      paths: products,
-      fallback: true
     };
 }
